@@ -13,6 +13,8 @@ jobs:
       uses: actions/github-script@v6
       with:
         script: |
+          const { context, core } = require('@actions/github');
+          
           const description = context.payload.pull_request.body || "";
           
           // Regex to match markdown image links: ![alt text](image-url)
@@ -20,7 +22,6 @@ jobs:
           
           // Check for matches
           const hasScreenshots = imageRegex.test(description);
-
           if (!hasScreenshots) {
             core.setFailed("No screenshots were found in the pull request description. Please add screenshots before merging.");
           } else {
