@@ -16,6 +16,9 @@ jobs:
           const { context, core } = require('@actions/github');
           
           const description = context.payload.pull_request.body || "";
+
+           // Print the PR description to the logs
+          console.log("PR Description:\n", description);
           
           // Regex to match markdown image links: ![alt text](image-url)
           const imageRegex = /!\[.*?\]\(.*?\)/g;
