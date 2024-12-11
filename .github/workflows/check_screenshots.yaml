@@ -19,9 +19,6 @@ jobs:
         # Print the PR body to see the content
         echo "PR Description: $PR_BODY"
 
-        # Print the PR body to see the content
-        echo "PR Description: $PR_BODY"
-
         # Regex to match Markdown image links: ![alt text](image-url)
         MARKDOWN_IMAGE_REGEX='!\[.*?\]\(.*?\)'
 
