@@ -24,7 +24,7 @@ jobs:
         MARKDOWN_IMAGE_REGEX='!\[.*\]\(.*\)'
 
         # Regex to match HTML <img> tags: <img width="1440" alt="..." src="image-url">
-        HTML_IMAGE_REGEX='<img[^>]*src=["\'][^"\']*["\'][^>]*>'
+        HTML_IMAGE_REGEX="<img[^>]*src=[\"'][^\"']*[\"'][^>]*>"
 
         # Check for matches (either Markdown or HTML images)
         # Escape line breaks and special characters in PR_BODY for correct matching
