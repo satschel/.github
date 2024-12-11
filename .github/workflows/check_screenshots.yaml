@@ -10,20 +10,22 @@ jobs:
 
     steps:
     - name: Check PR Description for Screenshots
-      uses: actions/github-script@v6
-      with:
-        script: |
-          const { context, core } = require('@actions/github');
-          
-          const description = context.payload.pull_request.body || "";
-          
-          // Regex to match markdown image links: ![alt text](image-url)
-          const imageRegex = /!\[.*?\]\(.*?\)/g;
-          
-          // Check for matches
-          const hasScreenshots = imageRegex.test(description);
-          if (!hasScreenshots) {
-            core.setFailed("No screenshots were found in the pull request description. Please add screenshots before merging.");
-          } else {
-            console.log("Screenshots found in the pull request description.");
-          }
+      run: |
+        # Fetch PR description using GitHub API
+        PR_BODY=$(curl -s \
+          -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
+          "https://api.github.com/repos/${{ github.repository }}/pulls/${{ github.event.pull_request.number }}" | jq -r '.body')
+
+        # Print the PR body to see the content
+        echo "PR Description: $PR_BODY"
+
+        # Regex to match markdown image links: ![alt text](image-url)
+        IMAGE_REGEX='!\[.*?\]\(.*?\)'
+
+        # Check for matches
+        if [[ ! "$PR_BODY" =~ $IMAGE_REGEX ]]; then
+          echo "No screenshots were found in the pull request description. Please add screenshots before merging."
+          exit 1
+        else
+          echo "Screenshots found in the pull request description."
+        fi
