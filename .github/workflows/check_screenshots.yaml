@@ -28,12 +28,10 @@ jobs:
 
         # Check for matches (either Markdown or HTML images)
         # Escape line breaks and special characters in PR_BODY for correct matching
+        # Check for matches (either Markdown or HTML images)
         if [[ "$PR_BODY" =~ $MARKDOWN_IMAGE_REGEX || "$PR_BODY" =~ $HTML_IMAGE_REGEX ]]; then
           echo "Screenshots found in the pull request description."
         else
           echo "No screenshots were found in the pull request description. Please add screenshots before merging."
           exit 1
-        fi
-        else
-          echo "Screenshots found in the pull request description."
         fi
