@@ -6,6 +6,7 @@ on:
 
 jobs:
   check-screenshots:
+    name: check_screenshots
     runs-on: ubuntu-latest
 
     steps:
