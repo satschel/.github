@@ -8,6 +8,8 @@ jobs:
   check-screenshots:
     name: check_screenshots
     runs-on: ubuntu-latest
+    permissions:
+      pull-requests: read
 
     steps:
     - name: Check PR Description for Screenshots
